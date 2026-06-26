@@ -54,5 +54,3 @@ The skill activates on questions about:
 - Contract keys, interfaces, data types
 - Canton 3.5 / SDK 3.5 migration
 - Translating Ethereum/Solidity patterns to Daml
-
-> ***Developed by Canton Foundation DevRel***
