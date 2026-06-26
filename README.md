@@ -8,10 +8,10 @@ When you ask Claude about Daml templates, choices, authorization errors, multipa
 
 ## Installation
 
-1. Download `CF-daml-skill.skill`
-2. In Claude.ai, go to **Settings → Skills**
-3. Upload the `.skill` file
-4. Start a new conversation, the skill is now active
+1. Download this repo in `.zip` file from code tab in top right.
+2. In Claude, go to **Customize → Skills**
+3. Upload the `.zip` file
+4. Refresh/ Restart Claude then in a new conversation the skill is now active.
 
 ## What it's good at
 
