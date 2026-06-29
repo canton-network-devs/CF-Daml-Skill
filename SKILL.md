@@ -117,10 +117,13 @@ Key rules:
 
 ```bash
 dpm new <name>                    # scaffold new project
+dpm new my-project --template daml-intro-contracts       # Use a fix Template in your dpm new project setup
 dpm build                         # compile → .dar
 dpm build --all                   # build all packages (multi-package)
 dpm test                          # run all Daml Script tests
-dpm test --files daml/Tests.daml  # run specific file
+dpm --version                     # Verifying the Installation
+dpm install 3.4.11                # To install a specific SDK version, for example here, version 3.4.11
+dpm install 3.4.11                # To install a specific SDK version, for example here, version 3.4.11
 dpm studio                        # VS Code with script runner
 dpm sandbox                       # local Canton participant
 dpm damlc inspect-dar <file>.dar  # inspect compiled DAR
