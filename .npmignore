@@ -1,0 +1,5 @@
+.github/
+.gitattributes
+node_modules/
+*.log
+.DS_Store

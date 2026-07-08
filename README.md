@@ -8,30 +8,35 @@ When you ask Claude about Daml templates, choices, authorization errors, multipa
 
 ## Installation
 
-1. Download this repo in `.zip` file from code tab in top right.
-2. In Claude, go to **Customize → Skills**
-3. Upload the `.zip` file
-4. Refresh/ Restart Claude then in a new conversation the skill is now active.
+```bash
+npx @canton-network-devs/cf-daml-skill
+```
+
+Detects Claude Desktop automatically and installs directly to your skills folder. If Claude Desktop isn't found, it builds a `.zip` for manual upload instead by following the steps:
+
+1. Go to **Claude.ai → Settings → Skills**
+2. Click **Upload skill**
+3. Select the `CF-daml-skill.zip` from your current directory
 
 ## What it's good at
 
-**Catching authorization errors before they hit the ledger**
+- **Catching authorization errors before they hit the ledger**
 
 The most common Daml failure mode isn't a syntax error it's an authorization chain that doesn't add up. The skill traces who needs to authorize what, and whether the parent transaction covers it.
 
-**Naming the right pattern**
+- **Naming the right pattern**
 
 Instead of improvising a workflow from scratch, the skill recognizes when Propose Accept, Delegation, or Multiple Party Agreement is the right structure, and gives you a correct skeleton rather than a plausible-looking one.
 
-**`createCmd` vs `create` and other context-dependent syntax**
+- **`createCmd` vs `create` and other context-dependent syntax**
 
 `createCmd` is only valid inside `submit` blocks in Daml Script. `create` is only valid inside choice `do` blocks. This trips up almost everyone new to Daml. The skill catches this and corrects it.
 
-**Canton 3.5 / SDK 3.5 specifics**
+- **Canton 3.5 / SDK 3.5 specifics**
 
 The `daml` CLI is removed in SDK 3.5. Contract keys require `--target=2.3`. `daml-script` must not appear in production packages. Scope-based JWTs are deprecated. The skill knows all of this and applies it when relevant.
 
-**Code review**
+- **Code review**
 
 Paste a Daml file and ask for a review. The skill works through a checklist: module header, signatories, authorization chain, `ensure` clauses, choice return types, consuming/non-consuming correctness, `Cmd` suffix usage, test coverage.
 

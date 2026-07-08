@@ -1,0 +1,44 @@
+{
+  "name": "@canton-network-devs/cf-daml-skill",
+  "version": "1.0.0",
+  "description": "Claude skill for writing correct Daml smart contracts on Canton Network",
+  "type": "module",
+  "bin": {
+    "cf-daml-skill": "./bin/install.js"
+  },
+  "files": [
+    "bin/",
+    "SKILL.md",
+    "references/",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node bin/install.js"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1"
+  },
+  "keywords": [
+    "daml",
+    "canton",
+    "canton-network",
+    "canton-foundation",
+    "claude-skill",
+    "smart-contracts",
+    "developer-tools",
+    "devrel"
+  ],
+  "author": "Canton Foundation Developer Relations <devrel@canton.foundation>",
+  "license": "Apache-2.0",
+  "homepage": "https://dev-hub.canton.foundation",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/canton-network-devs/CF-Daml-Skill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/canton-network-devs/CF-Daml-Skill/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
