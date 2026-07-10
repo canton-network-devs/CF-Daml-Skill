@@ -1,6 +1,6 @@
 {
   "name": "@canton-network-devs/cf-daml-skill",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Claude skill for writing correct Daml smart contracts on Canton Network",
   "type": "module",
   "bin": {
