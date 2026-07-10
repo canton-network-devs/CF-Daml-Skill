@@ -22,6 +22,20 @@ function claudeDesktopPath() {
 }
 const CLAUDE_SKILLS_DIR  = claudeDesktopPath();
 const SKILL_INSTALL_PATH = join(CLAUDE_SKILLS_DIR, "cf-daml-skill");
+function claudeDesktopFound() {
+  const p = platform();
+  if (p === "darwin") {
+    return (
+      existsSync("/Applications/Claude.app") ||
+      existsSync(join(homedir(), "Applications", "Claude.app")) ||
+      existsSync(join(homedir(), "Library", "Application Support", "Claude"))
+    );
+  }
+  if (p === "win32")
+    return existsSync(join(process.env.APPDATA || homedir(), "Claude"));
+  return existsSync(join(homedir(), ".claude"));
+}
+
 const C = {
   cyan:   s => `\x1b[36m${s}\x1b[0m`,
   green:  s => `\x1b[32m${s}\x1b[0m`,
@@ -68,7 +82,6 @@ async function buildZip(outputDir) {
 
   return outFile;
 }
-
 async function installToDesktop() {
   if (existsSync(SKILL_INSTALL_PATH)) {
     warn(`Already installed at ${C.bold(SKILL_INSTALL_PATH)}`);
@@ -114,7 +127,6 @@ function printPrompts() {
   console.log(C.cyan("  Try these prompts:"));
   console.log(`  ${C.dim("•")} "Review this Daml template for authorization errors"`);
   console.log(`  ${C.dim("•")} "What pattern for a regulated asset transfer?"`);
-  console.log(`  ${C.dim("•")} "Write a DvP workflow with a regulator observer"`);
   console.log(`  ${C.dim("•")} "Why is my choice failing authorization?"`);
   console.log("");
   console.log(`  ${C.dim("Docs:")} https://docs.canton.network`);
@@ -131,7 +143,7 @@ async function main() {
   verifySource();
   success("Skill source files verified");
   console.log("");
-  const desktopFound = existsSync(CLAUDE_SKILLS_DIR);
+  const desktopFound = claudeDesktopFound();
   if (desktopFound) {
     success(`Claude Desktop detected`);
     info(`Skills folder: ${C.dim(CLAUDE_SKILLS_DIR)}`);
