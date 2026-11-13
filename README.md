@@ -36,6 +36,10 @@ Instead of improvising a workflow from scratch, the skill recognizes when Propos
 
 The `daml` CLI is removed in SDK 3.5. Contract keys require `--target=2.3`. `daml-script` must not appear in production packages. Scope-based JWTs are deprecated. The skill knows all of this and applies it when relevant.
 
+- **Pointing to `dpm trace` for transaction debugging**
+
+When a transaction already ran or failed on a participant, the skill suggests [`dpm trace`](https://docs.walnut.dev/quickstart) to inspect the event tree, see why a submission was rejected, and compare transactions. It is installed separately.
+
 - **Code review**
 
 Paste a Daml file and ask for a review. The skill works through a checklist: module header, signatories, authorization chain, `ensure` clauses, choice return types, consuming/non-consuming correctness, `Cmd` suffix usage, test coverage.
@@ -52,6 +56,7 @@ The skill activates on questions about:
 
 - Daml templates, choices, signatories, observers, controllers
 - Authorization errors and why a transaction fails
+- Inspecting or comparing committed transactions (`dpm trace`)
 - Daml Script tests (`submit`, `submitMustFail`, `queryContractId`, etc.)
 - Multi-party workflows and which pattern to use
 - `daml.yaml` configuration and project structure

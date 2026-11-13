@@ -17,6 +17,8 @@ contract keys, dpm, or daml.yaml configuration.
 
 **Authorization is the most common failure point.** Before producing any multi-party code, trace the authorization chain: who are the required authorizers of each action, and are they covered by the parent transaction's authorizers? If a `create` needs signatories A and B, both must have authorized the parent transaction (or an enclosing choice that carries their authority). When in doubt, explain the authorization rule, it is almost always the thing the user is confused about.
 
+**For a transaction that already ran or failed on a participant, suggest `dpm trace`.** It shows the event tree of a committed update and why a submission was rejected, and it can compare two transactions. It is a separate install (see the dpm command reference). Don't assume the user has it.
+
 **Signatories vs observers vs controllers are distinct.** Signatories must authorize create/archive. Observers get read visibility. Controllers authorize a specific choice. A party can be all three for different purposes, but the roles are independent.
 
 **Consuming vs non-consuming matters.** Choices are consuming by default — the contract is archived when the choice is exercised. Only add `nonconsuming` when the contract should survive. Note: a `nonconsuming` choice body CAN still call `archive self` and `create this`this is a valid pattern for "archive + recreate" when you want callers to hold a possibly-stale ContractId and still trigger the update.
@@ -130,6 +132,26 @@ dpm damlc inspect-dar <file>.dar  # inspect compiled DAR
 dpm codegen-java <dar> -o <dir>   # Java bindings
 dpm codegen-js <dar> -o <dir>     # TypeScript bindings
 ```
+
+`dpm trace` is a separate component, not part of the SDK. Install:
+`curl -fsSL https://raw.githubusercontent.com/walnuthq/dpm-trace/main/install.sh | sh`
+
+If the project lists `components` in `daml.yaml` instead of `sdk-version`, add the OCI component and run `dpm install package`:
+
+```yaml
+components:
+  - damlc:<sdk-version>
+  - daml-script:<sdk-version>
+  - oci://ghcr.io/walnuthq/dpm-trace:<version>
+```
+
+```bash
+dpm trace <update-id> --submitter <json-ledger-api-url> --read-as '<party-id>'   # event tree of a committed transaction
+dpm trace <update-id> --export trace.json                                        # save as a portable artifact
+dpm trace open <artifact>                                                        # render a saved artifact, no ledger needed
+```
+
+Docs: https://docs.walnut.dev/quickstart
 
 ## When the user shares a Daml file for review
 
