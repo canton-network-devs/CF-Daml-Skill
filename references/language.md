@@ -422,7 +422,8 @@ Canton Network standard interfaces:
 
 ## 9. Contract keys (Canton 3.5+ / LF 2.3)
 
-Requires `--target=2.3` in `build-options`.
+Requires LF 2.3 and PV 35 or later. LF 2.3 is the default from SDK 3.6.1; on 3.5.x add
+`--target=2.3` to `build-options`.
 
 ```daml
 type AccountKey = (Party, Text)

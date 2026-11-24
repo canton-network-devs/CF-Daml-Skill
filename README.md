@@ -32,9 +32,11 @@ Instead of improvising a workflow from scratch, the skill recognizes when Propos
 
 `createCmd` is only valid inside `submit` blocks in Daml Script. `create` is only valid inside choice `do` blocks. This trips up almost everyone new to Daml. The skill catches this and corrects it.
 
-- **Canton 3.5 / SDK 3.5 specifics**
+- **Canton 3.5 – 3.7 specifics**
 
-The `daml` CLI is removed in SDK 3.5. Contract keys require `--target=2.3`. `daml-script` must not appear in production packages. Scope-based JWTs are deprecated. The skill knows all of this and applies it when relevant.
+The `daml` CLI is removed in SDK 3.5. LF 2.3 (contract keys) is the default from 3.6.1, and PV 34/35 are gone in 3.7. `daml-script` must not appear in production packages. 
+
+Scope-based JWTs and legacy Ledger API endpoints are deprecated or disabled. dpm 1.1.0+ adds Git-hosted DAR dependencies. The skill also tracks Splice changes that affect Daml authors (Token Standard V2, `requestedAt` rules, CIP-104 rewards). It knows all of this and applies it when relevant.
 
 - **Pointing to `dpm trace` for transaction debugging**
 
@@ -54,6 +56,10 @@ Paste a Daml file and ask for a review. The skill works through a checklist: mod
 
 The skill activates on questions about:
 
+## Triggers
+ 
+The skill activates on questions about:
+ 
 - Daml templates, choices, signatories, observers, controllers
 - Authorization errors and why a transaction fails
 - Inspecting or comparing committed transactions (`dpm trace`)
@@ -62,5 +68,5 @@ The skill activates on questions about:
 - `daml.yaml` configuration and project structure
 - `dpm` commands (build, test, studio, sandbox, codegen)
 - Contract keys, interfaces, data types
-- Canton 3.5 / SDK 3.5 migration
+- Canton 3.5 / 3.6 / 3.7 and SDK migration
 - Translating Ethereum/Solidity patterns to Daml
